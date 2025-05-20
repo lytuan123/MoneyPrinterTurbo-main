@@ -85,6 +85,9 @@ class VideoParams(BaseModel):
     video_clip_duration: Optional[int] = 5
     video_count: Optional[int] = 1
     material_type: Optional[MaterialType] = MaterialType.video
+    image_type: Optional[str] = "all"
+    image_count: Optional[int] = 20
+    image_duration: Optional[float] = 3.0
     video_source: Optional[str] = "pexels"
     video_materials: Optional[List[MaterialInfo]] = (
         None  # Materials used to generate the video
