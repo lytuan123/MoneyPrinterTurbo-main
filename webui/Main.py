@@ -579,9 +579,19 @@ with middle_panel:
         ]
 
         saved_video_source_name = config.app.get("video_source", "pexels")
-        saved_video_source_index = [v[1] for v in material_sources].index(
-            saved_video_source_name
-        )
+        # Find the index of the saved video source or default to the first option (pexels_video)
+        try:
+            saved_video_source_index = [v[1] for v in material_sources].index(saved_video_source_name)
+        except ValueError:
+            # If 'pexels' is saved but only 'pexels_video' exists in the list
+            if saved_video_source_name == "pexels":
+                # Try to find pexels_video
+                try:
+                    saved_video_source_index = [v[1] for v in material_sources].index("pexels_video")
+                except ValueError:
+                    saved_video_source_index = 0  # Default to first option
+            else:
+                saved_video_source_index = 0  # Default to first option
 
         selected_index = st.selectbox(
             tr("Material Source"),
